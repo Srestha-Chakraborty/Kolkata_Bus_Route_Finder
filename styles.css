@@ -1,0 +1,81 @@
+/* Global styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('background.jpg'); /* Add your background image here */
+    background-size: cover;
+    background-position: center;
+    color: #333;
+}
+
+header {
+    text-align: center;
+    padding: 50px 20px;
+    margin: 20px auto;
+}
+
+.logo {
+    width: 300px; /* Adjust the size of the logo as needed */
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Shadow effect for logo */
+}
+
+/* Search section styles */
+.search-section {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    width: 90%;
+    max-width: 600px;
+}
+
+.input-container {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+/* Results section styles */
+.results-section {
+    margin-top: 20px;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.bus-info {
+    background-color: #e9ecef;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 1.1em;
+}

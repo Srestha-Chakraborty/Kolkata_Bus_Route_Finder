@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find My Bus - Kolkata Bus Routes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Kolkata Bus Route Finder Logo" class="logo">
+    </header>
+    
+
+    <main>
+        <section class="search-section">
+            <form id="busForm" action="/search_bus" method="GET">
+                <div class="input-container">
+                    <label for="source">Source:</label>
+                    <input type="text" id="source" name="source" placeholder="Enter Source" required aria-label="Enter your source location">
+                </div>
+
+                <div class="input-container">
+                    <label for="destination">Destination:</label>
+                    <input type="text" id="destination" name="destination" placeholder="Enter Destination" required aria-label="Enter your destination location">
+                </div>
+
+                <button type="submit">Find Buses</button>
+            </form>
+        </section>
+
+        <section class="results-section" id="results">
+            <!-- Bus results will be displayed here -->
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
