@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find My Bus - Kolkata Bus Routes</title>
+    <style>
+        /* Global styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('background.jpg'); /* Add your background image here */
+    background-size: cover;
+    background-position: center;
+    color: #333;
+}
+
+header {
+    text-align: center;
+    padding: 50px 20px;
+    margin: 20px auto;
+}
+
+.logo {
+    width: 300px; /* Adjust the size of the logo as needed */
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Shadow effect for logo */
+}
+
+/* Search section styles */
+.search-section {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    width: 90%;
+    max-width: 600px;
+}
+
+.input-container {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+/* Results section styles */
+.results-section {
+    margin-top: 20px;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.bus-info {
+    background-color: #e9ecef;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 1.1em;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Kolkata Bus Route Finder Logo" class="logo">
+    </header>
+    
+
+    <main>
+        <section class="search-section">
+            <form id="busForm" action="/search_bus" method="GET">
+                <div class="input-container">
+                    <label for="source">Source:</label>
+                    <input type="text" id="source" name="source" placeholder="Enter Source" required aria-label="Enter your source location">
+                </div>
+
+                <div class="input-container">
+                    <label for="destination">Destination:</label>
+                    <input type="text" id="destination" name="destination" placeholder="Enter Destination" required aria-label="Enter your destination location">
+                </div>
+
+                <button type="submit">Find Buses</button>
+            </form>
+        </section>
+
+        <section class="results-section" id="results">
+            <!-- Bus results will be displayed here -->
+        </section>
+    </main>
+
+    <script>
+        document.getElementById('busForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+    const source = encodeURIComponent(document.getElementById('source').value);
+    const destination = encodeURIComponent(document.getElementById('destination').value);
+    const resultsDiv = document.getElementById('results');
+
+    // Clear previous results
+    resultsDiv.innerHTML = '<p>Loading...</p>'; // Show loading message
+
+    fetch(`/search_bus?source=${source}&destination=${destination}`)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(data => {
+        resultsDiv.innerHTML = ''; // Clear loading message
+
+        if (data.buses && data.buses.length > 0) {
+            data.buses.forEach(bus => {
+                const busInfo = document.createElement('div');
+                busInfo.classList.add('bus-info');
+                busInfo.innerHTML = `<p>Bus No: <strong>${bus.bus_no}</strong> | Route: ${bus.bus_name}</p>`;
+                resultsDiv.appendChild(busInfo);
+            });
+        } else {
+            resultsDiv.innerHTML = '<p>No buses found for the selected route.</p>';
+        }
+    })
+    .catch(error => {
+        resultsDiv.innerHTML = '<p>An error occurred while fetching bus data. Please try again later.</p>';
+        console.error('Error fetching bus data:', error);
+    });
+});
+    </script>
+</body>
+</html>
